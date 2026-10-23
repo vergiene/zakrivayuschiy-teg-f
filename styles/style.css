@@ -1,14 +1,23 @@
 /* Здесь вы напишете основную часть стилей страницы.
-
 Будьте внимательны! Для корректной работы скриптов на этом сайте нужно, чтобы в HTML некоторые классы были названы особым образом:
 ✦ like-icon — для svg-иконки анимированного сердца
 ✦ card__like-button — для кнопки Like рядом с иконкой
 ✦ card__icon-button — для кнопки, оборачивающей иконку
-✦ card__icon-button — для кнопки, оборачивающей иконку
 ✦ is-liked — для обозначения состояния лайкнутой иконки в виде сердца
 ✦ button__text — для обозначения текстового элемента внутри кнопки
-
 */
+
+/* TODO переписать все отступы на clamp */
+/* TODO подключить favicon.ico */
+/* TODO не забыть адаптивность */
+/* TODO Нет кнопки Сохранить на память с дискетой */
+/* TODO Кнопки сердца и Like */
+/* TODO Анимации */
+/* TODO Добавить label на карточки */
+/* TODO Добавить всплывающее окно */
+/* TODO Эффекты кнопок (hover, focus) */
+/* TODO Публикация сайта */
+/* TODO Не забыть сверить с заданием и чек-листом в конце */
 
 .page {
   min-inline-size: 320px;
@@ -32,7 +41,6 @@
   gap: 20px;
   background-color: #fff;
   border: 2px solid #000;
-  /*height: 368px;*/
   margin: 98px 0 96px;
   padding: 130px 0;
 }
@@ -87,6 +95,36 @@
   border-top: 2px solid #000;
   border-bottom: 2px solid #000;
   height: var(--section-width);
+}
+
+.card__image-blank-slate {
+  filter: saturate(0.35);
+}
+
+.card__image-what-if {
+  filter: saturate(4);
+}
+
+.card__image-chase {
+  filter: hue-rotate(20deg);
+}
+
+.card__image-support {
+  filter: invert(0.8);
+}
+
+.card__image-strategy {
+  filter: sepia(0.9);
+}
+
+.card__image-concentration {
+  filter: blur(10px);
+  clip-path: inset(0);
+}
+
+.card__image-current {
+  filter: hue-rotate(90deg) opacity(0.8) brightness(0.8) blur(3px);
+  clip-path: inset(0);
 }
 
 .card__text {
