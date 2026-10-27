@@ -7,8 +7,6 @@
 ✦ button__text — для обозначения текстового элемента внутри кнопки
 */
 
-/* TODO Найти, что сломало отступы */
-/* TODO Кнопки сердца и Like */
 /* TODO Анимации */
 /* TODO Эффекты кнопок (hover, focus) */
 /* TODO Публикация сайта */
@@ -155,6 +153,69 @@
   display: block;
 }
 
+.like-icon__main-body {
+  fill: transparent;
+  transition: fill linear 0.3s;
+}
+
+.like-icon__core {
+  fill: transparent;
+  transition: fill linear 0.3s 0.03s;
+}
+
+.like-icon__sparks {
+  opacity: 0;
+}
+
+.like-icon__contour {
+  fill: var(--heart-contour);
+  transition: fill linear 0.1s;
+}
+
+.like-icon:hover .like-icon__core {
+  fill: var(--animation-heart-color);
+  transition: fill linear 0.3s;
+}
+
+.like-icon:hover .like-icon__main-body {
+  fill: var(--animation-heart-color);
+  transition: fill linear 0.3s 0.05s;
+}
+
+.like-icon:active .like-icon__core {
+  fill: var(--animation-fill-color);
+  transition: fill linear 0.3s;
+}
+
+.like-icon:active .like-icon__main-body {
+  fill: var(--animation-fill-color);
+  transition: fill linear 0.3s 0.05s;
+}
+
+.like-icon.is-liked .like-icon__core {
+  fill: var(--animation-fill-color);
+  transition: fill linear 0.3s;
+}
+
+.like-icon.is-liked .like-icon__main-body {
+  fill: var(--animation-fill-color);
+  transition: fill linear 0.3s 0.05s;
+}
+
+.like-icon.is-liked .like-icon__contour {
+  fill: var(--animation-fill-color);
+  transition: fill linear 0.3s 0.06s;
+}
+
+.like-icon.is-liked .heart {
+  animation: pulse 0.3s 0.1s ease-in 1;
+  transform-origin: center;
+}
+
+.like-icon.is-liked .like-icon__sparks {
+  animation: sparks 0.3s 0.3s ease-in 1;
+}
+
 .card__like-button {
   font-family: var(--accent-font), sans-serif;
   font-size: var(--text-size);
@@ -179,21 +240,17 @@
 }
 
 dialog {
+  width: clamp(341px, 336.77px + 1.13vw, 353px);
+  max-width: 100%;
+  border: var(--border);
+}
+
+dialog[open] {
   display: grid;
   grid-template-columns: 39px 1fr;
   column-gap: 20px;
   row-gap: 30px;
   padding: 30px;
-  width: clamp(341px, calc(100vw - 34px), 353px);
-  max-width: 100%;
-  border: var(--border);
-  position: fixed;
-  inset: 0;
-}
-
-dialog:not([open]) {
-  pointer-events: none;
-  opacity: 0;
 }
 
 dialog::backdrop {
