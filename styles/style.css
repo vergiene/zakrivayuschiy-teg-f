@@ -7,8 +7,6 @@
 ✦ button__text — для обозначения текстового элемента внутри кнопки
 */
 
-/* TODO Анимации */
-/* TODO Эффекты кнопок (hover, focus) */
 /* TODO Публикация сайта */
 /* TODO Не забыть сверить с заданием и чек-листом в конце */
 
@@ -145,8 +143,17 @@
 
 .card__icon-button {
   padding: 0;
-  border: none;
+  border: 2px solid transparent;
   background: none;
+  transition: border-color 0.3s ease;
+}
+
+.card__icon-button:focus {
+  outline: none;
+}
+
+.card__icon-button:focus-visible {
+  border-color: var(--effect-accent-color);
 }
 
 .like-icon {
@@ -220,10 +227,12 @@
   font-family: var(--accent-font), sans-serif;
   font-size: var(--text-size);
   line-height: 0.9;
-  background: none;
+  background: var(--bg-color);
   border: var(--border);
   width: 130px;
   height: 38px;
+  transition: box-shadow 0.3s ease;
+  position: relative;
 }
 
 .save__button {
@@ -237,6 +246,8 @@
   padding: 15px 20px;
   gap: 8px;
   background-color: var(--bg-color);
+  transition: box-shadow 0.3s ease;
+  position: relative;
 }
 
 dialog {
@@ -272,11 +283,44 @@ dialog::backdrop {
   text-transform: uppercase;
   grid-column: 1 / -1;
   border: 2px solid #000;
-  background-color: var(--bg-color);;
+  background-color: var(--bg-color);
+  transition: box-shadow 0.3s ease;
+  position: relative;
 }
 
 .save__icon {
   align-self: center;
+}
+
+.card__like-button:focus,
+.save__button:focus,
+.dialog__button:focus {
+  outline: none;
+  box-shadow: 2px 2px 0 var(--effect-accent-color);
+}
+
+.button__text {
+  color: var(--effect-text-color);
+  mix-blend-mode: difference;
+  position: relative;
+}
+
+.card__like-button::before,
+.save__button::before,
+.dialog__button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease-in-out;
+  background-color: var(--effect-accent-color);
+}
+
+.card__like-button:hover::before,
+.save__button:hover::before,
+.dialog__button:hover::before {
+  transform: scaleX(1);
 }
 
 @media (width <= 375px) {
