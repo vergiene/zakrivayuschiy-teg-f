@@ -7,34 +7,35 @@
 ✦ button__text — для обозначения текстового элемента внутри кнопки
 */
 
+/* TODO Размер обводки на кнопке-сердце и mix-blend-mode: difference; на кнопке сохранить */
 /* TODO Публикация сайта */
 /* TODO Не забыть сверить с заданием и чек-листом в конце */
 
 .page {
-  min-inline-size: 320px;
-  min-block-size: 100dvb;
-  font-family: var(--main-font), sans-serif;
-  font-variation-settings: var(--main-font-weight);
-  background-image: var(--background-gradient);
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 96px;
   margin: 98px 0;
+  font-family: var(--main-font), sans-serif;
+  background-image: var(--background-gradient);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  min-inline-size: 320px;
+  min-block-size: 100dvb;
+  font-variation-settings: var(--main-font-weight);
 }
 
 .header {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   gap: 20px;
-  background-color: var(--bg-color);
   border: var(--border);
   padding: var(--header-padding);
+  background-color: var(--bg-color);
 }
 
 .section_size {
@@ -66,9 +67,9 @@
 }
 
 .card__title {
-  font-variation-settings: var(--accent-font-weight);
-  font-size: 18px;
   margin: 4px 10px;
+  font-size: 18px;
+  font-variation-settings: var(--accent-font-weight);
 }
 
 .img__wrapper {
@@ -79,18 +80,18 @@
   position: absolute;
   top: 25px;
   right: 25px;
+  z-index: 1;
   opacity: 0.5;
-  mix-blend-mode: hard-light;
   font-family: var(--accent-font), sans-serif;
   font-size: var(--text-size);
+  mix-blend-mode: hard-light;
   -webkit-text-stroke: 1px var(--bg-color);
-  z-index: 1;
 }
 
 .card__image {
+  height: var(--section-width);
   border-top: var(--border);
   border-bottom: var(--border);
-  height: var(--section-width);
 }
 
 .card__image-blank-slate {
@@ -142,8 +143,8 @@
 }
 
 .card__icon-button {
-  padding: 0;
   border: 2px solid transparent;
+  padding: 0;
   background: none;
   transition: border-color 0.3s ease;
 }
@@ -215,8 +216,8 @@
 }
 
 .like-icon.is-liked .heart {
-  animation: pulse 0.3s 0.1s ease-in 1;
   transform-origin: center;
+  animation: pulse 0.3s 0.1s ease-in 1;
 }
 
 .like-icon.is-liked .like-icon__sparks {
@@ -224,30 +225,30 @@
 }
 
 .card__like-button {
+  position: relative;
+  width: 130px;
+  height: 38px;
+  border: var(--border);
   font-family: var(--accent-font), sans-serif;
   font-size: var(--text-size);
   line-height: 0.9;
   background: var(--bg-color);
-  border: var(--border);
-  width: 130px;
-  height: 38px;
   transition: box-shadow 0.3s ease;
-  position: relative;
 }
 
 .save__button {
-  font-family: var(--accent-font), sans-serif;
-  font-size: var(--text-size);
-  line-height: 0.9;
-  border: var(--border);
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 15px 20px;
   gap: 8px;
+  border: var(--border);
+  padding: 15px 20px;
+  font-family: var(--accent-font), sans-serif;
+  font-size: var(--text-size);
+  line-height: 0.9;
   background-color: var(--bg-color);
   transition: box-shadow 0.3s ease;
-  position: relative;
 }
 
 dialog {
@@ -259,8 +260,8 @@ dialog {
 dialog[open] {
   display: grid;
   grid-template-columns: 39px 1fr;
-  column-gap: 20px;
   row-gap: 30px;
+  column-gap: 20px;
   padding: 30px;
 }
 
@@ -276,16 +277,16 @@ dialog::backdrop {
 }
 
 .dialog__button {
+  position: relative;
+  grid-column: 1 / -1;
+  border: 2px solid #000;
+  padding: 9px 17px;
   font-family: var(--accent-font), sans-serif;
   font-size: var(--text-size);
   line-height: 0.9;
-  padding: 9px 17px;
   text-transform: uppercase;
-  grid-column: 1 / -1;
-  border: 2px solid #000;
   background-color: var(--bg-color);
   transition: box-shadow 0.3s ease;
-  position: relative;
 }
 
 .save__icon {
@@ -295,26 +296,30 @@ dialog::backdrop {
 .card__like-button:focus,
 .save__button:focus,
 .dialog__button:focus {
-  outline: none;
   box-shadow: 2px 2px 0 var(--effect-accent-color);
+  outline: none;
 }
 
 .button__text {
+  position: relative;
   color: var(--effect-text-color);
   mix-blend-mode: difference;
-  position: relative;
+}
+
+.icon {
+  mix-blend-mode: difference;
 }
 
 .card__like-button::before,
 .save__button::before,
 .dialog__button::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
+  background-color: var(--effect-accent-color);
+  transition: transform 0.5s ease-in-out;
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.5s ease-in-out;
-  background-color: var(--effect-accent-color);
 }
 
 .card__like-button:hover::before,
