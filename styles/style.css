@@ -239,7 +239,7 @@
   animation: sparks 0.3s 0.3s ease-in 1;
 }
 
-.button  {
+.button {
   position: relative;
   border: var(--border);
   font-family: var(--accent-font), sans-serif;
