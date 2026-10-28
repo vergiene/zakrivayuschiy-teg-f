@@ -7,10 +7,6 @@
 ✦ button__text — для обозначения текстового элемента внутри кнопки
 */
 
-/* TODO Размер обводки на кнопке-сердце и mix-blend-mode: difference; на кнопке сохранить */
-/* TODO Публикация сайта */
-/* TODO Не забыть сверить с заданием и чек-листом в конце */
-
 .page {
   display: flex;
   flex-direction: column;
@@ -18,6 +14,7 @@
   gap: 96px;
   margin: 98px 0;
   font-family: var(--main-font), sans-serif;
+  background-color: var(--bg-color);
   background-image: var(--background-gradient);
   background-position: center;
   background-size: cover;
@@ -38,7 +35,7 @@
   background-color: var(--bg-color);
 }
 
-.section_size {
+.section-size {
   width: var(--section-width);
   max-width: 100%;
 }
@@ -84,14 +81,27 @@
   opacity: 0.5;
   font-family: var(--accent-font), sans-serif;
   font-size: var(--text-size);
+  text-shadow:
+    -1px -1px 0 var(--text-stroke-color),
+    1px -1px 0 var(--text-stroke-color),
+    -1px 1px 0 var(--text-stroke-color),
+    1px 1px 0 var(--text-stroke-color);
   mix-blend-mode: hard-light;
-  -webkit-text-stroke: 1px var(--bg-color);
+}
+
+@supports ((text-stroke: 1px #fff) or (-webkit-text-stroke: 1px #fff)) {
+  .img__label {
+    text-shadow: none;
+    -webkit-text-stroke: 1px var(--text-stroke-color);
+    text-stroke: 1px var(--text-stroke-color);
+  }
 }
 
 .card__image {
   height: var(--section-width);
   border-top: var(--border);
   border-bottom: var(--border);
+  object-fit: cover;
 }
 
 .card__image-blank-slate {
@@ -143,10 +153,15 @@
 }
 
 .card__icon-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 38px;
   border: 2px solid transparent;
   padding: 0;
   background: none;
   transition: border-color 0.3s ease;
+  cursor: pointer;
 }
 
 .card__icon-button:focus {
@@ -161,13 +176,16 @@
   display: block;
 }
 
+.like-icon__contour {
+  fill: var(--heart-contour);
+  transition: fill linear 0.1s;
+}
+
 .like-icon__main-body {
-  fill: transparent;
   transition: fill linear 0.3s;
 }
 
 .like-icon__core {
-  fill: transparent;
   transition: fill linear 0.3s 0.03s;
 }
 
@@ -175,9 +193,9 @@
   opacity: 0;
 }
 
-.like-icon__contour {
-  fill: var(--heart-contour);
-  transition: fill linear 0.1s;
+.like-icon:hover .like-icon__main-body {
+  fill: var(--animation-heart-color);
+  transition: fill linear 0.3s 0.05s;
 }
 
 .like-icon:hover .like-icon__core {
@@ -185,8 +203,8 @@
   transition: fill linear 0.3s;
 }
 
-.like-icon:hover .like-icon__main-body {
-  fill: var(--animation-heart-color);
+.like-icon:active .like-icon__main-body {
+  fill: var(--animation-fill-color);
   transition: fill linear 0.3s 0.05s;
 }
 
@@ -195,7 +213,17 @@
   transition: fill linear 0.3s;
 }
 
-.like-icon:active .like-icon__main-body {
+.like-icon.is-liked .heart {
+  transform-origin: center;
+  animation: pulse 0.3s 0.1s ease-in 1;
+}
+
+.like-icon.is-liked .like-icon__contour {
+  fill: var(--animation-fill-color);
+  transition: fill linear 0.3s 0.06s;
+}
+
+.like-icon.is-liked .like-icon__main-body {
   fill: var(--animation-fill-color);
   transition: fill linear 0.3s 0.05s;
 }
@@ -205,21 +233,6 @@
   transition: fill linear 0.3s;
 }
 
-.like-icon.is-liked .like-icon__main-body {
-  fill: var(--animation-fill-color);
-  transition: fill linear 0.3s 0.05s;
-}
-
-.like-icon.is-liked .like-icon__contour {
-  fill: var(--animation-fill-color);
-  transition: fill linear 0.3s 0.06s;
-}
-
-.like-icon.is-liked .heart {
-  transform-origin: center;
-  animation: pulse 0.3s 0.1s ease-in 1;
-}
-
 .like-icon.is-liked .like-icon__sparks {
   animation: sparks 0.3s 0.3s ease-in 1;
 }
@@ -227,13 +240,19 @@
 .card__like-button {
   position: relative;
   width: 130px;
-  height: 38px;
   border: var(--border);
   font-family: var(--accent-font), sans-serif;
   font-size: var(--text-size);
   line-height: 0.9;
   background: var(--bg-color);
   transition: box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.button__text {
+  position: relative;
+  color: var(--effect-text-color);
+  mix-blend-mode: difference;
 }
 
 .save__button {
@@ -249,6 +268,12 @@
   line-height: 0.9;
   background-color: var(--bg-color);
   transition: box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.icon {
+  color: var(--effect-text-color);
+  mix-blend-mode: difference;
 }
 
 dialog {
@@ -263,10 +288,15 @@ dialog[open] {
   row-gap: 30px;
   column-gap: 20px;
   padding: 30px;
+  background-color: var(--bg-color);
 }
 
 dialog::backdrop {
   background-color: rgb(0 0 0 / 0.75);
+}
+
+.save__icon {
+  align-self: center;
 }
 
 .dialog__content {
@@ -279,7 +309,7 @@ dialog::backdrop {
 .dialog__button {
   position: relative;
   grid-column: 1 / -1;
-  border: 2px solid #000;
+  border: var(--border);
   padding: 9px 17px;
   font-family: var(--accent-font), sans-serif;
   font-size: var(--text-size);
@@ -287,27 +317,19 @@ dialog::backdrop {
   text-transform: uppercase;
   background-color: var(--bg-color);
   transition: box-shadow 0.3s ease;
-}
-
-.save__icon {
-  align-self: center;
+  cursor: pointer;
 }
 
 .card__like-button:focus,
 .save__button:focus,
 .dialog__button:focus {
-  box-shadow: 2px 2px 0 var(--effect-accent-color);
   outline: none;
 }
 
-.button__text {
-  position: relative;
-  color: var(--effect-text-color);
-  mix-blend-mode: difference;
-}
-
-.icon {
-  mix-blend-mode: difference;
+.card__like-button:focus-visible,
+.save__button:focus-visible,
+.dialog__button:focus-visible {
+  box-shadow: 2px 2px 0 var(--effect-accent-color);
 }
 
 .card__like-button::before,
@@ -338,7 +360,7 @@ dialog::backdrop {
     height: 28px;
   }
 
-  dialog {
+  dialog[open] {
     padding: 30px 40px;
   }
 }
